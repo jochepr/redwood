@@ -102,6 +102,96 @@ test('Pretranspile polyfills unsupported functionality', () => {
   )
 
   expect(code).toContain(
+    `import _Promise from "core-js-pure/features/promise/index.js"`
+  )
+  const _Promise = require('core-js-pure/features/promise/index.js')
+  expect(_Promise).toHaveProperty('any')
+
+  expect(code).toContain(
+    `import _replaceAllInstanceProperty from "core-js-pure/features/instance/replace-all.js"`
+  )
+
+  expect(code).toContain(
+    `import _Object$hasOwn from "core-js-pure/features/object/has-own.js"`
+  )
+
+  // Expect these to remain unchanged.
+  expect(code).toContain(
+    [
+      `const buffer = new ArrayBuffer(8);`,
+      `const uint8 = new Uint8Array(buffer);`,
+      `uint8.set([1, 2, 3], 3);`,
+    ].join('\n')
+  )
+
+  expect(code).toContain(
+    `import _findLastInstanceProperty from "core-js-pure/features/instance/find-last.js"`
+  )
+  expect(code).toContain(
+    `import _findLastIndexInstanceProperty from "core-js-pure/features/instance/find-last-index.js"`
+  )
+
+  expect(code).toContain(
+    `import _DOMException from "core-js-pure/features/dom-exception.js"`
+  )
+
+  expect(code).toContain(
+    `import _structuredClone from "core-js-pure/features/structured-clone.js"`
+  )
+
+  expect(code).toContain(`import _btoa from "core-js-pure/features/btoa.js"`)
+
+  expect(code).toContain(`import _atob from "core-js-pure/features/atob.js"`)
+
+  expect(code).toContain(
+    `import _filterRejectInstanceProperty from "core-js-pure/features/instance/filterReject.js"`
+  )
+
+  expect(code).toContain(
+    `import _uniqueByInstanceProperty from "core-js-pure/features/instance/unique-by.js"`
+  )
+
+  expect(code).toContain(
+    `import _Array$fromAsync from "core-js-pure/features/array/from-async.js"`
+  )
+  expect(code).toContain(
+    `import _Array$isTemplateObject from "core-js-pure/features/array/is-template-object.js"`
+  )
+
+  expect(code).toContain(
+    `import _toReversedInstanceProperty from "core-js-pure/features/instance/to-reversed.js"`
+  )
+  expect(code).toContain(
+    `import _toSortedInstanceProperty from "core-js-pure/features/instance/to-sorted.js"`
+  )
+  expect(code).toContain(
+    `import _toSplicedInstanceProperty from "core-js-pure/features/instance/to-spliced.js"`
+  )
+  expect(code).toContain(
+    `import _withInstanceProperty from "core-js-pure/features/instance/with.js"`
+  )
+
+  // Expect these to remain unchanged.
+  expect(code).toContain(
+    [
+      `[1, 2, 3].lastItem;`,
+      `[1, 2, 3].lastIndex;`,
+      `const array = [1, 2, 3];`,
+      `array.lastItem = 4;`,
+      `new Array(1, 2, 3).lastItem;`,
+      `new Array(1, 2, 3).lastIndex;`,
+      `[1, 2, 3, 4, 5].group(it => it % 2);`,
+      `const map = [1, 2, 3, 4, 5].groupToMap(it => it % 2);`,
+      `map.get(1);`,
+      `map.get(0);`,
+    ].join('\n')
+  )
+
+  expect(code).toContain(
+    `import _BigInt$range from "core-js-pure/features/bigint/range.js"`
+  )
+
+  expect(code).toContain(
     `import _compositeKey from "core-js-pure/features/composite-key.js"`
   )
   expect(code).toContain(
@@ -109,9 +199,36 @@ test('Pretranspile polyfills unsupported functionality', () => {
   )
 
   expect(code).toContain(
+    `import _unThisInstanceProperty from "core-js-pure/features/instance/un-this.js"`
+  )
+
+  expect(code).toContain(
+    `import _Function$isCallable from "core-js-pure/features/function/is-callable.js"`
+  )
+  expect(code).toContain(
+    `import _Function$isConstructor from "core-js-pure/features/function/is-constructor.js"`
+  )
+
+  expect(code).toContain(
+    `import _toArrayInstanceProperty from "core-js-pure/features/instance/to-array.js"`
+  )
+  expect(code).toContain(
+    `import _takeInstanceProperty from "core-js-pure/features/instance/take.js"`
+  )
+  expect(code).toContain(
+    `import _dropInstanceProperty from "core-js-pure/features/instance/drop.js"`
+  )
+  expect(code).toContain(
+    `import _Iterator$from from "core-js-pure/features/iterator/from.js"`
+  )
+  expect(code).toContain(
+    `import _AsyncIterator$from from "core-js-pure/features/async-iterator/from.js"`
+  )
+
+  expect(code).toContain(
     `import _Map from "core-js-pure/features/map/index.js"`
   )
-  const _Map = require('@babel/runtime-corejs3/core-js/map')
+  const _Map = require('core-js-pure/features/map/index.js')
   expect(_Map).toHaveProperty('deleteAll')
   expect(_Map).toHaveProperty('every')
   expect(_Map).toHaveProperty('filter')
@@ -129,6 +246,12 @@ test('Pretranspile polyfills unsupported functionality', () => {
   expect(_Map).toHaveProperty('reduce')
   expect(_Map).toHaveProperty('some')
   expect(_Map).toHaveProperty('update')
+  expect(_Map).toHaveProperty('updateOrInsert')
+  expect(_Map).toHaveProperty('upsert')
+
+  expect(code).toContain(
+    `import _emplaceInstanceProperty from "core-js-pure/features/instance/emplace.js"`
+  )
 
   expect(code).toContain(
     `import _Math$clamp from "core-js-pure/features/math/clamp.js"`
@@ -136,7 +259,6 @@ test('Pretranspile polyfills unsupported functionality', () => {
   expect(code).toContain(
     `import _Math$DEG_PER_RAD from "core-js-pure/features/math/deg-per-rad.js"`
   )
-
   expect(code).toContain(
     `import _Math$degrees from "core-js-pure/features/math/degrees.js"`
   )
@@ -174,6 +296,30 @@ test('Pretranspile polyfills unsupported functionality', () => {
   expect(code).toContain(
     `import _Number$fromString from "core-js-pure/features/number/from-string.js"`
   )
+  expect(code).toContain(
+    `import _Number$range from "core-js-pure/features/number/range.js"`
+  )
+
+  expect(code).toContain(
+    [
+      `const obj = {`,
+      `  foo: 'bar',`,
+      `  baz: 'blah'`,
+      `};`,
+      '',
+      `for (const [key, value] of Object.iterateEntries(obj)) {`,
+      `  console.log(\`\${key} -> \${value}\`);`,
+      `}`,
+      '',
+      `for (const key of Object.iterateKeys(obj)) {`,
+      `  console.log(key);`,
+      `}`,
+      '',
+      `for (const value of Object.iterateValues(obj)) {`,
+      `  console.log(value);`,
+      `}`,
+    ].join('\n')
+  )
 
   expect(code).toContain(
     `import _Observable from "core-js-pure/features/observable/index.js"`
@@ -182,27 +328,40 @@ test('Pretranspile polyfills unsupported functionality', () => {
     `import _Symbol$observable from "core-js-pure/features/symbol/observable.js"`
   )
 
-  expect(code).toContain(
-    `import _Promise from "core-js-pure/features/promise/index.js"`
-  )
-  const _Promise = require('core-js-pure/features/promise/index.js')
-  expect(_Promise).toHaveProperty('any')
   expect(_Promise).toHaveProperty('try')
 
   expect(code).toContain(
     `import _Reflect$defineMetadata from "core-js-pure/features/reflect/define-metadata.js"`
   )
   expect(code).toContain(
-    `import _Reflect$getOwnMetadataKeys from "core-js-pure/features/reflect/get-own-metadata-keys.js"`
+    `import _Reflect$deleteMetadata from "core-js-pure/features/reflect/delete-metadata.js"`
+  )
+  expect(code).toContain(
+    `import _Reflect$getMetadata from "core-js-pure/features/reflect/get-metadata.js"`
+  )
+  expect(code).toContain(
+    `import _Reflect$getMetadataKeys from "core-js-pure/features/reflect/get-metadata-keys.js"`
   )
   expect(code).toContain(
     `import _Reflect$getOwnMetadata from "core-js-pure/features/reflect/get-own-metadata.js"`
+  )
+  expect(code).toContain(
+    `import _Reflect$getOwnMetadataKeys from "core-js-pure/features/reflect/get-own-metadata-keys.js"`
+  )
+  expect(code).toContain(
+    `import _Reflect$hasMetadata from "core-js-pure/features/reflect/has-metadata.js"`
+  )
+  expect(code).toContain(
+    `import _Reflect$hasOwnMetadata from "core-js-pure/features/reflect/has-own-metadata.js"`
+  )
+  expect(code).toContain(
+    `import _Reflect$metadata from "core-js-pure/features/reflect/metadata.js"`
   )
 
   expect(code).toContain(
     `import _Set from "core-js-pure/features/set/index.js"`
   )
-  const _Set = require('@babel/runtime-corejs3/core-js/set')
+  const _Set = require('core-js-pure/features/set/index.js')
   expect(_Set).toHaveProperty('addAll')
   expect(_Set).toHaveProperty('deleteAll')
   expect(_Set).toHaveProperty('difference')
@@ -226,22 +385,31 @@ test('Pretranspile polyfills unsupported functionality', () => {
     `import _codePointsInstanceProperty from "core-js-pure/features/instance/code-points.js"`
   )
   expect(code).toContain(
-    `import _replaceAllInstanceProperty from "core-js-pure/features/instance/replace-all.js"`
-  )
-  expect(code).toContain(
     `import _atInstanceProperty from "core-js-pure/features/instance/at.js"`
   )
+
   expect(code).toContain(
-    `import _Symbol$patternMatch from "core-js-pure/features/symbol/pattern-match.js"`
+    `import _Symbol$asyncDispose from "core-js-pure/features/symbol/async-dispose.js"`
   )
   expect(code).toContain(
     `import _Symbol$dispose from "core-js-pure/features/symbol/dispose.js"`
   )
 
   expect(code).toContain(
+    `import _Symbol$matcher from "core-js-pure/features/symbol/matcher.js"`
+  )
+  expect(code).toContain(
+    `import _Symbol$patternMatch from "core-js-pure/features/symbol/pattern-match.js"`
+  )
+
+  expect(code).toContain(
+    `import _Symbol$metadata from "core-js-pure/features/symbol/metadata.js"`
+  )
+
+  expect(code).toContain(
     `import _WeakMap from "core-js-pure/features/weak-map/index.js"`
   )
-  const _WeakMap = require('@babel/runtime-corejs3/core-js/weak-map')
+  const _WeakMap = require('core-js-pure/features/weak-map/index.js')
   expect(_WeakMap).toHaveProperty('deleteAll')
   expect(_WeakMap).toHaveProperty('from')
   expect(_WeakMap).toHaveProperty('of')
@@ -249,31 +417,11 @@ test('Pretranspile polyfills unsupported functionality', () => {
   expect(code).toContain(
     `import _WeakSet from "core-js-pure/features/weak-set/index.js"`
   )
-  const _WeakSet = require('@babel/runtime-corejs3/core-js/weak-set')
+  const _WeakSet = require('core-js-pure/features/weak-set/index.js')
   expect(_WeakSet).toHaveProperty('addAll')
   expect(_WeakSet).toHaveProperty('deleteAll')
   expect(_WeakSet).toHaveProperty('from')
   expect(_WeakSet).toHaveProperty('of')
-
-  // Expect these to remain unchanged.
-  expect(code).toContain(
-    [
-      `const buffer = new ArrayBuffer(8);`,
-      `const uint8 = new Uint8Array(buffer);`,
-      `uint8.set([1, 2, 3], 3);`,
-    ].join('\n')
-  )
-
-  expect(code).toContain(
-    [
-      `[1, 2, 3].lastItem;`,
-      `[1, 2, 3].lastIndex;`,
-      `const array = [1, 2, 3];`,
-      `array.lastItem = 4;`,
-      `new Array(1, 2, 3).lastItem;`,
-      `new Array(1, 2, 3).lastIndex;`,
-    ].join('\n')
-  )
 })
 
 test.skip('Pretranspile uses corejs3 aliasing', () => {
@@ -508,3 +656,51 @@ test('core-js polyfill list', () => {
     ]
   `)
 })
+
+/**
+ * List of untested polyfills...
+ *
+ * - es.error.cause
+ *   Node.js 16.11
+ * - es.aggregate-error.cause
+ *   Node.js 16.11
+ *
+ * - es.array.push
+ *   Added in core-js v3.23; doesn't seem to matter for Node.js.
+ *   Changelog seems to suggest it was broken in some browsers.
+ *   See https://github.com/zloirock/core-js/blob/master/CHANGELOG.md#3230---20220614
+ *
+ * - es.string.at-alternative
+ *   Not sure...
+ *
+ *   Overridden in pure
+ * - es.reflect.to-string-tag
+ *   es.regexp.flags
+ *   es.typed-array.at
+ *   es.typed-array.find-last
+ *   es.typed-array.find-last-index
+ *   es.typed-array.set
+ *
+ *   Rename. See https://github.com/tc39/proposal-array-filtering/pull/18
+ * - esnext.array.filter-out
+ *   esnext.array.group-by
+ *   esnext.array.group-by-to-map
+ *
+ * - esnext.symbol.metadata-key
+ *   Seems like it should work but doesn't
+ *
+ * - esnext.symbol.replace-all
+ *   Will be removed in core-js 4
+ *
+ *   These get polyfilled, but the polyfill is generic across arrays and TypedArrays,
+ *   and looking under the hood, it doesn't actually handle typed arrays.
+ * - esnext.typed-array.from-async
+ *   esnext.typed-array.filter-out
+ *   esnext.typed-array.filter-reject
+ *   esnext.typed-array.group-by
+ *   esnext.typed-array.to-reversed
+ *   esnext.typed-array.to-sorted
+ *   esnext.typed-array.to-spliced
+ *   esnext.typed-array.unique-by
+ *   esnext.typed-array.with
+ */
