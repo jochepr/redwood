@@ -27,7 +27,7 @@ const error1 = new TypeError('Error 1')
 const error2 = new TypeError('Error 2')
 const aggregate = new AggregateError([error1, error2], 'Collected errors')
 
-// ✅ / Node.js 15  / esnext.promise.any (starts with esnext cause core-js is pinned to v3.0.0)
+// ✅ / Node.js 15  / es.promise.any
 Promise.any([
   Promise.resolve(1),
   Promise.reject(2),
@@ -66,18 +66,18 @@ function isOdd(value) {
 
 // ✅ / Node.js 17 / web.dom-exception.constructor, web.dom-exception.stack, web.dom-exception.to-string-tag
 const exception = new DOMException('error', 'DataCloneError');
-console.log(exception.name);                            // => 'DataCloneError'
-console.log(exception.message);                         // => 'error'
-console.log(exception.code);                            // => 25
-console.log(typeof exception.stack);                    // => 'string'
-console.log(exception instanceof DOMException);         // => true
-console.log(exception instanceof Error);                // => true
-console.log(exception.toString());                      // => 'DataCloneError: error'
-console.log(Object.prototype.toString.call(exception)); // => '[object DOMException]'
+console.log(exception.name)
+console.log(exception.message)
+console.log(exception.code)
+console.log(typeof exception.stack)
+console.log(exception instanceof DOMException)
+console.log(exception instanceof Error)
+console.log(exception.toString())
+console.log(Object.prototype.toString.call(exception))
 
 // ✅ / Node.js 17 / web.structured-clone
-const structured = [{ a: 42 }];
-const sclone = structuredClone(structured);
+const structured = [{ a: 42 }]
+const sclone = structuredClone(structured)
 
 // ✅ / Node.js 17.5 / web.btoa
 btoa('hi, core-js')
@@ -107,12 +107,9 @@ atob('aGksIGNvcmUtanM=')
  * ❌ / Stage 3 / esnext.array.group, esnext.array.group-by, esnext.array.group-by-to-map, esnext.array.group-to-map
  */
 ;[1, 2, 3, 4, 5].filterReject(it => it % 2)
-
 ;[1, 2, 3, 2, 1].uniqueBy()
-
 await Array.fromAsync((async function * (){ yield * [1, 2, 3] })(), i => i * i)
 Array.isTemplateObject((it => it)`qwe${ 123 }asd`)
-
 ;[1, 2, 3].toReversed()
 ;[3, 1, 2].toSorted()
 ;[1, 2, 3, 4].toSpliced(1, 2, 5, 6, 7)
@@ -155,7 +152,6 @@ const symbol = compositeSymbol({})
  */
 const slice = Array.prototype.slice.unThis();
 slice([1, 2, 3], 1)
-
 Function.isCallable(null)
 Function.isConstructor(null)
 
@@ -243,8 +239,8 @@ await [1, 2, 3].values().toAsync().map(async it => it ** 2).toArray()
 const m = new Map()
 m.deleteAll()
 
-const mapEmplace = new Map([['a', 2]]);
-mapEmplace.emplace('a', { update: it => it ** 2, insert: () => 3}); // => 4
+const mapEmplace = new Map([['a', 2]])
+mapEmplace.emplace('a', { update: it => it ** 2, insert: () => 3})
 
 /**
  * ## Math
@@ -281,7 +277,7 @@ Math.isubh(lo0, hi0, lo1, hi1)
 Math.umulh(a, b)
 for (let x of Math.seededPRNG({ seed: 42 })) {
   console.log(x)
-  if (x > .8) break;
+  if (x > .8) break
 }
 
 /**
@@ -293,7 +289,7 @@ for (let x of Math.seededPRNG({ seed: 42 })) {
 Number.fromString('42')
 
 for (const i of Number.range(1, 10)) {
-  console.log(i); // => 1, 2, 3, 4, 5, 6, 7, 8, 9
+  console.log(i)
 }
 
 /**
@@ -301,18 +297,18 @@ for (const i of Number.range(1, 10)) {
  *
  * ❌ / Will be removed in core-js 4 / esnext.object.iterate-entries, esnext.object.iterate-keys, esnext.object.iterate-values
  */
-const obj = { foo: 'bar', baz: 'blah' };
+const obj = { foo: 'bar', baz: 'blah' }
 
 for (const [key, value] of Object.iterateEntries(obj)) {
-  console.log(`${key} -> ${value}`);
+  console.log(`${key} -> ${value}`)
 }
 
 for (const key of Object.iterateKeys(obj)) {
-  console.log(key);
+  console.log(key)
 }
 
 for (const value of Object.iterateValues(obj)) {
-  console.log(value);
+  console.log(value)
 }
 
 /**
@@ -353,14 +349,14 @@ Promise.try(() => { throw 42; }).catch(it => console.log(`Promise, rejected as $
  * - esnext.reflect.has-own-metadata
  * - esnext.reflect.metadata
  */
-Reflect.defineMetadata(metadataKey, metadataValue, target);
-Reflect.deleteMetadata(metadataKey, target);
-Reflect.getMetadata(metadataKey, target);
-Reflect.getMetadataKeys(target);
-Reflect.getOwnMetadata(metadataKey, target);
-Reflect.getOwnMetadataKeys(target);
-Reflect.hasMetadata(metadataKey, target);
-Reflect.hasOwnMetadata(metadataKey, target);
+Reflect.defineMetadata(metadataKey, metadataValue, target)
+Reflect.deleteMetadata(metadataKey, target)
+Reflect.getMetadata(metadataKey, target)
+Reflect.getMetadataKeys(target)
+Reflect.getOwnMetadata(metadataKey, target)
+Reflect.getOwnMetadataKeys(target)
+Reflect.hasMetadata(metadataKey, target)
+Reflect.hasOwnMetadata(metadataKey, target)
 Reflect.metadata(metadataKey, metadataValue)
 
 /**
